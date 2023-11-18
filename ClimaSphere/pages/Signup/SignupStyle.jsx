@@ -61,4 +61,10 @@ export const styles = StyleSheet.create({
         color: '#ffffff',
         fontWeight: 'bold',
     },
+    error: {
+        color: 'red',
+        alignSelf: 'flex-start',
+        marginLeft: '10%',
+        marginTop: 4,
+    },
 });

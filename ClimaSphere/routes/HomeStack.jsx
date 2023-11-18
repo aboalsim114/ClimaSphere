@@ -32,7 +32,7 @@ const HomeStack = createStackNavigator(
 
     },
     {
-        initialRouteName: 'WelcomePage', // Optional: Set the initial route
+        initialRouteName: 'WelcomePage',
     }
 );
 

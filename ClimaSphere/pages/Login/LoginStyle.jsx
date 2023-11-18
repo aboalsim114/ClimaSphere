@@ -36,6 +36,12 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         shadowColor: '#222',
     },
+    error: {
+        color: 'red',
+        alignSelf: 'flex-start',
+        marginLeft: '10%',
+        marginTop: 4,
+    },
     button: {
         width: '80%',
         backgroundColor: '#00BDD6',
