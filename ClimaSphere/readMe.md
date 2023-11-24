@@ -1,6 +1,8 @@
-# ClimaSphere
+
 
 ![ClimaSphere](https://image.noelshack.com/fichiers/2023/47/6/1700869054-dall-e-2023-11-25-00-25-07-create-a-visually-captivating-and-highly-realistic-3d-illustration-specifically-for-a-project-called-climasphere-the-design-should-prominently-disp.jpg)
+
+# ClimaSphere
 
 ## Description
 ClimaSphere est une application mobile cross-plateforme développée avec React Native, conçue pour fournir des informations météorologiques en temps réel. L'application permet aux utilisateurs de choisir et de rechercher des villes pour afficher les conditions météorologiques actuelles. De plus, ClimaSphere offre la possibilité d'ajouter des villes en favoris pour un accès rapide aux prévisions.
