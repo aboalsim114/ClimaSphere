@@ -5,7 +5,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Login() {
+export default function Login({ setIsAuthenticated }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -23,7 +23,8 @@ export default function Login() {
             console.log("User signed in", userCredential); // Pour le debugging
             const token = await userCredential.user.getIdToken();
             await AsyncStorage.setItem('@auth_token', token); // Stockage du token
-            navigation.navigate('Authenticated', { screen: 'Profile' }); // Correct navigation
+            setIsAuthenticated(true);
+            navigation.navigate('Profile'); // Correct navigation
             setLoading(false);
         } catch (error) {
             console.error("Login error", error); // Pour le debugging
