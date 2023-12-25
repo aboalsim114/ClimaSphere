@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { getAuth, signOut } from "firebase/auth";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Profile from '../pages/Profile/Profile';
-
+import MeteoHome from '../pages/Meteo/MeteoHome';
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator({ setIsAuthenticated }) {
@@ -20,7 +20,22 @@ export default function TabNavigator({ setIsAuthenticated }) {
     };
 
     return (
+
+
+
         <Tab.Navigator>
+            <Tab.Screen
+                name="Meteo"
+                component={MeteoHome}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="cloud" color={color} size={size} />
+                    ),
+                    title: '',
+                    headerShown: false,
+                }}
+            />
+
             <Tab.Screen
                 name="Profile"
                 component={Profile}
@@ -45,6 +60,9 @@ export default function TabNavigator({ setIsAuthenticated }) {
                     ),
                 }}
             />
+
+
+
         </Tab.Navigator>
     );
 }

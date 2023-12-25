@@ -1,65 +1,71 @@
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, SafeAreaView, StyleSheet, Alert } from 'react-native';
-import { TextInput, Button, useTheme } from 'react-native-paper';
+import { TextInput, Button, Text, useTheme } from 'react-native-paper';
 import { getAuth, signOut } from "firebase/auth";
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
-
+import { styles } from "./PorofileStyle";
 export default function Profile() {
     const { colors } = useTheme();
     const auth = getAuth();
     const firestore = getFirestore();
     const user = auth.currentUser;
     const [email, setEmail] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (user) {
             setEmail(user.email);
         } else {
-            // pass
+            // Handle when user is not signed in
         }
     }, [user]);
 
     const handleSave = async () => {
+        if (!email) {
+            Alert.alert("Validation Error", "Please enter an email address.");
+            return;
+        }
+
+        setIsLoading(true);
+
         try {
             const userDoc = doc(firestore, "users", user.uid);
             await updateDoc(userDoc, {
                 email: email
             });
-            Alert.alert("Profil mis à jour", "Votre profil a été mis à jour avec succès.");
+            Alert.alert("Profile Updated", "Your profile has been updated successfully.");
         } catch (error) {
-            Alert.alert("Erreur de mise à jour", error.message);
+            Alert.alert("Update Error", error.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
-    const handleSignOut = async () => {
-        try {
-            await signOut(auth);
-            // Ajouter la logique de redirection après la déconnexion
-        } catch (error) {
-            Alert.alert("Erreur de déconnexion", error.message);
-        }
-    };
+
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView>
+            <ScrollView contentContainerStyle={styles.scrollViewContent}>
                 <View style={styles.profileContainer}>
+                    <Text style={styles.heading}>Edit Profile</Text>
                     <TextInput
-                        label="Mail"
+                        label="Email"
                         mode="outlined"
                         style={styles.input}
                         keyboardType="email-address"
                         theme={{ colors: { primary: colors.primary, text: colors.primary } }}
                         value={email}
                         onChangeText={text => setEmail(text)}
-                        editable={true}
+                        editable={!isLoading}
                     />
                     <Button
                         mode="contained"
                         onPress={handleSave}
                         style={styles.button}
+                        loading={isLoading}
+                        disabled={isLoading}
                     >
-                        Sauvegarder les modifications
+                        Save Changes
                     </Button>
 
                 </View>
@@ -68,23 +74,3 @@ export default function Profile() {
     );
 }
 
-// Styles
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-    },
-    profileContainer: {
-        padding: 10,
-        alignItems: 'center',
-    },
-    input: {
-        width: '90%',
-        backgroundColor: 'transparent',
-        marginBottom: 10,
-    },
-    button: {
-        marginTop: 10,
-        width: '90%',
-    },
-});
