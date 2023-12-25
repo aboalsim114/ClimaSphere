@@ -46,7 +46,7 @@ export default function SearchMeteo() {
         <View style={styles.container}>
             <View style={styles.searchContainer}>
                 <TextInput
-                    placeholder="Search for a city"
+                    placeholder="Rechercher une ville"
                     style={styles.searchBar}
                     value={searchText}
                     onChangeText={setSearchText}

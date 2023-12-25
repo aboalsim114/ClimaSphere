@@ -7,13 +7,19 @@ import Profile from "../pages/Profile/Profile";
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator({ setIsAuthenticated }) {
+
+    const options = {
+        headerTransparent: true,
+        headerTitle: "",
+    }
+
     return (
         <Stack.Navigator initialRouteName='WelcomePage'>
-            <Stack.Screen name="WelcomePage" component={WelcomePage} />
-            <Stack.Screen name="Login">
+            <Stack.Screen name="WelcomePage" component={WelcomePage} options={options} />
+            <Stack.Screen name="Login" options={options}>
                 {props => <Login {...props} setIsAuthenticated={setIsAuthenticated} />}
             </Stack.Screen>
-            <Stack.Screen name="Signup">
+            <Stack.Screen name="Signup" options={options}>
                 {props => <Signup {...props} setIsAuthenticated={setIsAuthenticated} />}
             </Stack.Screen>
             <Stack.Screen name="Profile" component={Profile} />
