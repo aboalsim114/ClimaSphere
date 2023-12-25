@@ -5,6 +5,7 @@ import { getAuth, signOut } from "firebase/auth";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Profile from '../pages/Profile/Profile';
 import MeteoHome from '../pages/Meteo/MeteoHome';
+import SearchMeteo from '../pages/SearchMeteo/SearchMeteo';
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator({ setIsAuthenticated }) {
@@ -25,11 +26,23 @@ export default function TabNavigator({ setIsAuthenticated }) {
 
         <Tab.Navigator>
             <Tab.Screen
-                name="Meteo"
+                name="MeteoHome"
                 component={MeteoHome}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="cloud" color={color} size={size} />
+                    ),
+                    title: '',
+                    headerShown: false,
+                }}
+            />
+
+            <Tab.Screen
+                name="SearchMeteo"
+                component={SearchMeteo}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="search" color={color} size={size} />
                     ),
                     title: '',
                     headerShown: false,

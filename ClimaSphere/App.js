@@ -1,8 +1,10 @@
+import "./console.js"
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import StackNavigator from './navigation/StackNavigator';
 import TabNavigator from './navigation/TabNavigator';
+
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
